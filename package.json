@@ -9,7 +9,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "bower": "1.8.8",
-    "bower-npm-resolver": "^0.10.0",
+    "bower-npm-resolver": "^0.11.0",
     "openolitor-core": "git://github.com/OpenOlitor/openolitor-client-core.git#2.4.2",
     "pako": "^1.0.10"
   },
