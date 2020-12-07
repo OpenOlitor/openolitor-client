@@ -523,7 +523,9 @@ footer,
   padding: 10px;
 }
 
-[ng-quill-editor] { display: block; }
+[ng-quill-editor] {
+  display: block;
+}
 
 @media (max-width: 940px) {
   .adsbygoogle {
@@ -786,4 +788,10 @@ tr.error {
 hr.light {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.qrcode-container {
+  display: grid;
+  justify-content: center;
+  padding: 20px;
 }

@@ -23,6 +23,7 @@ angular.module('openolitor-admin')
         'MONATE',
         'WAEHRUNG',
         'EINSATZEINHEIT',
+        'SECOND_FACTOR_TYPES',
         'Upload',
         'msgBus',
         'cloneObj',
@@ -31,7 +32,7 @@ angular.module('openolitor-admin')
         'gettextCatalog',
         function($scope, $rootScope, $filter, NgTableParams, KundentypenService,
             KundentypenModel, PersonCategoriesService, PersonCategoriesModel, ProduktekategorienService, ProduktekategorienModel, ArbeitskategorienService, ArbeitskategorienModel,
-            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,
+            ProjektService, ProjektModel, OpenProjektModel, KontoDatenService, KontoDatenModel, EnumUtil, FileSaver, MONATE, WAEHRUNG, EINSATZEINHEIT,SECOND_FACTOR_TYPES,
             Upload, msgBus, cloneObj, appConfig, alertService, gettextCatalog
         ) {
             $rootScope.viewId = 'S-Proj';
@@ -75,6 +76,8 @@ angular.module('openolitor-admin')
             $scope.einsatzEinheiten = EnumUtil.asArray(EINSATZEINHEIT);
 
             $scope.monate = EnumUtil.asArray(MONATE);
+
+            $scope.secondFactorTypes = EnumUtil.asArray(SECOND_FACTOR_TYPES);
 
             $scope.tage = [];
             for (var i = 1; i <= 31; i++) {

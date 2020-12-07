@@ -1,336 +1,403 @@
 <div class="row">
   <div class="content content-box col-md-12">
     <div oo-error-overlay></div>
-     <div class="col-md-12"><h3 translate>Projekteinstellungen</h3></div>
+    <div class="col-md-12">
+      <h3 translate>Projekteinstellungen</h3>
+    </div>
 
-      <form name="projektForm" oo-confirm-on-dirty>
-        <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <span class="navbar-brand" translate>Stammdaten</span>
-                <span class="pull-right" ng-if="!editMode">
-                  <button ng-click="switchToEditMode()" class="btn btn-warning">
-                    <i class="fa fa-pencil-square-o"></i>
-                    <span translate>Einstellungen editieren</span>
-                  </button>
-                </span>
-                <span class="pull-right" ng-if="editMode">
-                  <oo-save-button model="projekt" form="projektForm" entity="Projekt" on-save="saveProjekt"><span translate>Stammdaten</span></oo-save-button>
-                </span>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="bezeichnung" translate>Bezeichnung</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="projekt.bezeichnung" placeholder="{{'Name oder Bezeichnung'|translate}}" maxlength = 50 required>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="strasse" translate>Strasse / Nr.</label>
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="strasse" ng-disabled="!editMode"  ng-model="projekt.strasse" placeholder="{{'Strasse'|translate}}" maxlength="30">
-                </div>
-                <div class="col-md-2">
-                  <input type="text" class="form-control" id="hausNummer" ng-disabled="!editMode" ng-model="projekt.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="adressZusatz" translate>Adresszusatz</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" name="adressZusatz" ng-disabled="!editMode" ng-model="projekt.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}" maxlength = 100>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="plz" translate>PLZ / Ort</label>
-                </div>
-                <div class="col-md-3">
-                  <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-disabled="!editMode" ng-model="projekt.plz" placeholder="{{'PLZ'|translate}}" maxlength="5">
-                </div>
-                <div class="col-md-5">
-                  <input type="text" class="form-control" id="ort" ng-disabled="!editMode" ng-model="projekt.ort" placeholder="{{'Ort'|translate}}" maxlength="35">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="waehrung" translate>Währung</label>
-                </div>
-                <div class="col-md-7">
-                  <oo-dropdown dropdown-id="waehrung" disabled="!editMode" display-style="uib-dropdown" values="waehrungen" selected-prop="id" property="label" selected="projekt.waehrung" ng-required></oo-dropdown>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="geschaeftsjahr" translate>Start des Geschäftsjahres</label>
-                </div>
-                <div class="col-md-2">
-                  <oo-dropdown dropdown-id="geschaeftsjahrTag" disabled="!editMode" display-style="uib-dropdown" values="tage" selected-prop="id" property="id" selected="projekt.geschaeftsjahrTag" ng-required></oo-dropdown>
-                </div>
-                <div class="col-md-5">
-                  <oo-dropdown dropdown-id="geschaeftsjahrMonat" disabled="!editMode" display-style="uib-dropdown" values="monate" selected-prop="value" property="label" selected="projekt.geschaeftsjahrMonat" ng-required></oo-dropdown>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <span class="navbar-brand" translate>Konfigurationen</span>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="sprache" translate>Sprache</label>
-                </div>
-                <div class="col-md-4">
-                  <input type="text" class="form-control" id="sprache" ng-model="projekt.sprache" ng-disabled="!editMode" placeholder="{{'Beispiel: de-CH'|translate}}" ng-pattern="localeBCP47Pattern" maxlength = 10>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="preiseSichtbar" translate>Preise sichtbar / relevant</label>
-                </div>
-                <div class="col-md-4" ng-if="projectResolved">
-                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.preiseSichtbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                </div>
-              </div>
-              <div class="row form-group" ng-show="projekt.preiseSichtbar">
-                <div class="col-md-8">
-                  <label for="preiseEditierbar" translate>Preise editierbar</label>
-                </div>
-                <div class="col-md-4" ng-if="projectResolved">
-                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.preiseEditierbar" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="emailErforderlich" translate>Kunden E-Mail erforderlich</label>
-                </div>
-                <div class="col-md-4" ng-if="projectResolved">
-                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.emailErforderlich" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="emailErforderlich" translate>Vom System generierte E-Mail versenden</label>
-                </div>
-                <div class="col-md-4" ng-if="projectResolved">
-                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.generierteMailsSenden" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="bccAddEmail" translate>Beim Senden von E-Mail bcc hinzufügen</label>
-                </div>
-                <div class="col-md-4" ng-if="projectResolved">
-                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.sendEmailToBcc" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                </div>
-              </div>
-            </div>
-
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <span class="navbar-brand" translate>Arbeitseinsatz</span>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="emailErforderlich" translate>Personenliste übrigen Teilnehmern anzeigen</label>
-                </div>
-                <div class="col-md-4" ng-if="projectResolved">
-                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.einsatzShowListeKunde" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="emailErforderlich" translate>Absage bis Anzahl Tage vor Einsatz</label>
-                </div>
-                <div class="col-md-4" ng-if="projectResolved">
-                  <input type="number" class="form-control" id="einsatzAbsageVorlaufTage" ng-model="projekt.einsatzAbsageVorlaufTage" ng-disabled="!editMode" placeholder="{{'Anzahl Tage'|translate}}">
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="waehrung" translate>Einsatz Einheit</label>
-                </div>
-                <div class="col-md-4">
-                  <oo-dropdown dropdown-id="einsatzEinheit" disabled="!editMode" display-style="uib-dropdown" values="einsatzEinheiten" selected-prop="id" property="label" selected="projekt.einsatzEinheit" ng-required></oo-dropdown>
-                </div>
-              </div>
-            </div>
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <span class="navbar-brand" translate>Two-Factor-Authentisierung</span>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <div class="row form-group" ng-repeat="(role, value) in projekt.twoFactorAuthentication">
-                <div class="col-md-8">
-                  <label for="secondFactorErforderlich{{role}}">{{role|translate}}</label>
-                </div>
-                <div class="col-md-4">
-                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.twoFactorAuthentication[role]" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                </div>
-              </div>
-            </div>
-
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <span class="navbar-brand" translate>Unterhalt</span>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="bezeichnung" translate>Mitteilung vor dem Login</label>
-                </div>
-                <div class="col-md-8">
-                      <textarea class="form-control" name="welcomeMessage1TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage1" placeholder=" {{'Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird'|translate}}..." maxlength = 2000></textarea>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="welcomeMessage2Label" translate>Mitteilung nach dem Login</label>
-                </div>
-                <div class="col-md-8">
-                      <textarea class="form-control" name="welcomeMessage2TextArea" ng-disabled="!editMode" ng-model="projekt.welcomeMessage2" placeholder="{{'Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird'|translate}}..." maxlength = 2000></textarea>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-8">
-                  <label for="maintenanceModeLabel" translate>Unterhaltsmodus (Login auf Kundenportal blockiert)</label>
-                </div>
-                <div class="col-md-4" ng-if="projectResolved">
-                  <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.maintenanceMode" type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}" switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger" switch-radio-off="false" ng-true-value="true" ng-false-value="false">
-                </div>
-              </div>
-              </div>
-
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title">
-                <span class="navbar-brand" translate>Kontodaten</span>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="bezeichnung" translate>QR-IBAN</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.iban" placeholder="{{'IBAN'|translate}}" ng-iban>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="bezeichnung" translate>BIC</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.bic" placeholder="{{'BIC'|translate}}"  maxlength=11>
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="bezeichnung" translate>Teilnehmernummer</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" pattern="[0-9]{9}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.teilnehmerNummer" placeholder="{{'Teilnehmernummer'|translate}}">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="bezeichnung" translate>Referenznummer Präfix</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" pattern="[0-9]{0,27}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.referenzNummerPrefix" placeholder="{{'Referenznummer Präfix'|translate}}">
-                </div>
-              </div>
-
-                <div class="row form-group">
-                <div class="col-md-4">
-                  <label for="bezeichnung" translate>Gläubiger-Identifikationsnummer</label>
-                </div>
-                <div class="col-md-8">
-                  <input type="text" pattern="[A-zA-Z0-9]{0,35}" class="form-control" name="bezeichnung" ng-disabled="!editMode" ng-model="kontodaten.creditorIdentifier" placeholder="{{'Gläubiger-Identifikationsnummer'|translate}}">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-
+    <form name="projektForm" oo-confirm-on-dirty>
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading clearfix">
-            <h3 class="panel-title"><span class="navbar-brand" translate>Dateien</span></h3>
+            <h3 class="panel-title">
+              <span class="navbar-brand" translate>Stammdaten</span>
+              <span class="pull-right" ng-if="!editMode">
+                <button ng-click="switchToEditMode()" class="btn btn-warning">
+                  <i class="fa fa-pencil-square-o"></i>
+                  <span translate>Einstellungen editieren</span>
+                </button>
+              </span>
+              <span class="pull-right" ng-if="editMode">
+                <oo-save-button model="projekt" form="projektForm" entity="Projekt" on-save="saveProjekt"><span
+                    translate>Stammdaten</span></oo-save-button>
+              </span>
+            </h3>
           </div>
           <div class="panel-body">
             <div class="row form-group">
-              <div class="col-md-2">
-                <label for="logo" translate>Logo</label>
+              <div class="col-md-4">
+                <label for="bezeichnung" translate>Bezeichnung</label>
               </div>
-              <div class="col-md-4" ng-if="logoUrl">
-                <img class="logo-maxsize" http-src="{{logoUrl}}" />
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode"
+                  ng-model="projekt.bezeichnung" placeholder="{{'Name oder Bezeichnung'|translate}}" maxlength=50
+                  required>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="strasse" translate>Strasse / Nr.</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="strasse" ng-disabled="!editMode" ng-model="projekt.strasse"
+                  placeholder="{{'Strasse'|translate}}" maxlength="30">
+              </div>
+              <div class="col-md-2">
+                <input type="text" class="form-control" id="hausNummer" ng-disabled="!editMode"
+                  ng-model="projekt.hausNummer" placeholder="{{'Nr'|translate}}" maxlength="10">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="adressZusatz" translate>Adresszusatz</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="adressZusatz" ng-disabled="!editMode"
+                  ng-model="projekt.adressZusatz" placeholder="{{'Postfach, c/o, ...'|translate}}" maxlength=100>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="plz" translate>PLZ / Ort</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" pattern="[0-9]{4,5}" class="form-control" id="plz" ng-disabled="!editMode"
+                  ng-model="projekt.plz" placeholder="{{'PLZ'|translate}}" maxlength="5">
               </div>
               <div class="col-md-5">
-                <div class="button drop-box" ng-model="logoFile" name="logoFile" ngf-pattern="'image/*'"
-                  ngf-accept="'image/*'" ngf-max-size="1MB" ngf-select="uploadLogo($file)" ngf-drop="uploadLogo($file)"
-                  ngf-resize="{width: 200, height: 200}">
-                  <span ng-if="!logoUrl" translate>Logo auswählen oder einfügen</span>
-                  <span ng-if="logoUrl" translate>Ein neues Logo auswählen oder einfügen</span>
-                </div>
+                <input type="text" class="form-control" id="ort" ng-disabled="!editMode" ng-model="projekt.ort"
+                  placeholder="{{'Ort'|translate}}" maxlength="35">
               </div>
             </div>
             <div class="row form-group">
               <div class="col-md-4">
-                <label for="logo" translate>Style<br />(Admin-Seite)</label>
+                <label for="waehrung" translate>Währung</label>
               </div>
-              <div class="col-md-2" ng-if="logoUrl">
-                <a href="" ng-click="downloadStyle('admin')" translate>Download</a>
-              </div>
-              <div class="col-md-6">
-                <div class="button drop-box" ng-model="styleAdminFile" name="styleAdminFile" ngf-pattern="'text/css'"
-                  ngf-accept="'text/css'" ngf-max-size="1MB" ngf-select="uploadStyle($file, 'style-admin')"
-                  ngf-drop="uploadStyle($file, 'style-admin')">
-                  <span translate> CSS-Datei auswählen oder einfügen </span>
-                </div>
+              <div class="col-md-7">
+                <oo-dropdown dropdown-id="waehrung" disabled="!editMode" display-style="uib-dropdown"
+                  values="waehrungen" selected-prop="id" property="label" selected="projekt.waehrung" ng-required>
+                </oo-dropdown>
               </div>
             </div>
             <div class="row form-group">
               <div class="col-md-4">
-                <label for="logo" translate>Style<br />(Kundenportal)</label>
-              </div>
-              <div class="col-md-2" ng-if="logoUrl">
-                <a href="" ng-click="downloadStyle('kundenportal')" translate>Download</a>
-              </div>
-              <div class="col-md-6">
-                <div class="button drop-box" ng-model="styleAdminFile" name="styleAdminFile" ngf-pattern="'text/css'"
-                  ngf-accept="'text/css'" ngf-max-size="1MB" ngf-select="uploadStyle($file, 'style-kundenportal')"
-                  ngf-drop="uploadStyle($file, 'style-kundenportal')">
-                  <span translate> CSS-Datei auswählen oder einfügen </span>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-4">
-                <label for="logo" translate>Importdatei</label>
+                <label for="geschaeftsjahr" translate>Start des Geschäftsjahres</label>
               </div>
               <div class="col-md-2">
-                <a href="" ng-click="downloadImportFile()" translate>Download</a>
+                <oo-dropdown dropdown-id="geschaeftsjahrTag" disabled="!editMode" display-style="uib-dropdown"
+                  values="tage" selected-prop="id" property="id" selected="projekt.geschaeftsjahrTag" ng-required>
+                </oo-dropdown>
+              </div>
+              <div class="col-md-5">
+                <oo-dropdown dropdown-id="geschaeftsjahrMonat" disabled="!editMode" display-style="uib-dropdown"
+                  values="monate" selected-prop="value" property="label" selected="projekt.geschaeftsjahrMonat"
+                  ng-required></oo-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title">
+              <span class="navbar-brand" translate>Konfigurationen</span>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="sprache" translate>Sprache</label>
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" id="sprache" ng-model="projekt.sprache" ng-disabled="!editMode"
+                  placeholder="{{'Beispiel: de-CH'|translate}}" ng-pattern="localeBCP47Pattern" maxlength=10>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="preiseSichtbar" translate>Preise sichtbar / relevant</label>
+              </div>
+              <div class="col-md-4" ng-if="projectResolved">
+                <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.preiseSichtbar" type="checkbox"
+                  switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}"
+                  switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger"
+                  switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+            </div>
+            <div class="row form-group" ng-show="projekt.preiseSichtbar">
+              <div class="col-md-8">
+                <label for="preiseEditierbar" translate>Preise editierbar</label>
+              </div>
+              <div class="col-md-4" ng-if="projectResolved">
+                <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.preiseEditierbar" type="checkbox"
+                  switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}"
+                  switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger"
+                  switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="emailErforderlich" translate>Kunden E-Mail erforderlich</label>
+              </div>
+              <div class="col-md-4" ng-if="projectResolved">
+                <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.emailErforderlich" type="checkbox"
+                  switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}"
+                  switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger"
+                  switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="emailErforderlich" translate>Vom System generierte E-Mail versenden</label>
+              </div>
+              <div class="col-md-4" ng-if="projectResolved">
+                <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.generierteMailsSenden"
+                  type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}"
+                  switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger"
+                  switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="bccAddEmail" translate>Beim Senden von E-Mail bcc hinzufügen</label>
+              </div>
+              <div class="col-md-4" ng-if="projectResolved">
+                <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.sendEmailToBcc" type="checkbox"
+                  switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}"
+                  switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger"
+                  switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title">
+              <span class="navbar-brand" translate>Arbeitseinsatz</span>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="emailErforderlich" translate>Personenliste übrigen Teilnehmern anzeigen</label>
+              </div>
+              <div class="col-md-4" ng-if="projectResolved">
+                <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.einsatzShowListeKunde"
+                  type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}"
+                  switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger"
+                  switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="emailErforderlich" translate>Absage bis Anzahl Tage vor Einsatz</label>
+              </div>
+              <div class="col-md-4" ng-if="projectResolved">
+                <input type="number" class="form-control" id="einsatzAbsageVorlaufTage"
+                  ng-model="projekt.einsatzAbsageVorlaufTage" ng-disabled="!editMode"
+                  placeholder="{{'Anzahl Tage'|translate}}">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="waehrung" translate>Einsatz Einheit</label>
+              </div>
+              <div class="col-md-4">
+                <oo-dropdown dropdown-id="einsatzEinheit" disabled="!editMode" display-style="uib-dropdown"
+                  values="einsatzEinheiten" selected-prop="id" property="label" selected="projekt.einsatzEinheit"
+                  ng-required></oo-dropdown>
+              </div>
+            </div>
+          </div>
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title">
+              <span class="navbar-brand" translate>Two-Factor-Authentisierung</span>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div class="row form-group" ng-repeat="(role, value) in projekt.twoFactorAuthentication">
+              <div class="col-md-8">
+                <label for="secondFactorErforderlich{{role}}">{{role|translate}}</label>
+              </div>
+              <div class="col-md-4">
+                <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.twoFactorAuthentication[role]"
+                  type="checkbox" switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}"
+                  switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger"
+                  switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="defaultSecondFactorType" translate>Standard Two-Factor-Typ</label>
+              </div>
+              <div class="col-md-4">
+                <oo-dropdown dropdown-id="defaultSecondFactorType" disabled="!editMode" display-style="uib-dropdown"
+                  values="secondFactorTypes" selected-prop="id" property="label"
+                  selected="projekt.defaultSecondFactorType" ng-required></oo-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title">
+              <span class="navbar-brand" translate>Unterhalt</span>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="bezeichnung" translate>Mitteilung vor dem Login</label>
+              </div>
+              <div class="col-md-8">
+                <textarea class="form-control" name="welcomeMessage1TextArea" ng-disabled="!editMode"
+                  ng-model="projekt.welcomeMessage1"
+                  placeholder=" {{'Mitteilung welche allen Nutzenden vor dem Einloggen angezeigt wird'|translate}}..."
+                  maxlength=2000></textarea>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="welcomeMessage2Label" translate>Mitteilung nach dem Login</label>
+              </div>
+              <div class="col-md-8">
+                <textarea class="form-control" name="welcomeMessage2TextArea" ng-disabled="!editMode"
+                  ng-model="projekt.welcomeMessage2"
+                  placeholder="{{'Mitteilung welche den Nutzenden nach dem erfolgreichen Einloggen angezeigt wird'|translate}}..."
+                  maxlength=2000></textarea>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-8">
+                <label for="maintenanceModeLabel" translate>Unterhaltsmodus (Login auf Kundenportal blockiert)</label>
+              </div>
+              <div class="col-md-4" ng-if="projectResolved">
+                <input bs-switch switch-readonly="{{!editMode}}" ng-model="projekt.maintenanceMode" type="checkbox"
+                  switch-size="medium" switch-animate="true" switch-on-text="{{'Ja'|translate}}"
+                  switch-off-text="{{'Nein'|translate}}" switch-on-color="success" switch-off-color="danger"
+                  switch-radio-off="false" ng-true-value="true" ng-false-value="false">
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title">
+              <span class="navbar-brand" translate>Kontodaten</span>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="bezeichnung" translate>QR-IBAN</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode"
+                  ng-model="kontodaten.iban" placeholder="{{'IBAN'|translate}}" ng-iban>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="bezeichnung" translate>BIC</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="bezeichnung" ng-disabled="!editMode"
+                  ng-model="kontodaten.bic" placeholder="{{'BIC'|translate}}" maxlength=11>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="bezeichnung" translate>Teilnehmernummer</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" pattern="[0-9]{9}" class="form-control" name="bezeichnung" ng-disabled="!editMode"
+                  ng-model="kontodaten.teilnehmerNummer" placeholder="{{'Teilnehmernummer'|translate}}">
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="bezeichnung" translate>Referenznummer Präfix</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" pattern="[0-9]{0,27}" class="form-control" name="bezeichnung" ng-disabled="!editMode"
+                  ng-model="kontodaten.referenzNummerPrefix" placeholder="{{'Referenznummer Präfix'|translate}}">
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col-md-4">
+                <label for="bezeichnung" translate>Gläubiger-Identifikationsnummer</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" pattern="[A-zA-Z0-9]{0,35}" class="form-control" name="bezeichnung"
+                  ng-disabled="!editMode" ng-model="kontodaten.creditorIdentifier"
+                  placeholder="{{'Gläubiger-Identifikationsnummer'|translate}}">
               </div>
             </div>
           </div>
         </div>
       </div>
+    </form>
+
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h3 class="panel-title"><span class="navbar-brand" translate>Dateien</span></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row form-group">
+            <div class="col-md-2">
+              <label for="logo" translate>Logo</label>
+            </div>
+            <div class="col-md-4" ng-if="logoUrl">
+              <img class="logo-maxsize" http-src="{{logoUrl}}" />
+            </div>
+            <div class="col-md-5">
+              <div class="button drop-box" ng-model="logoFile" name="logoFile" ngf-pattern="'image/*'"
+                ngf-accept="'image/*'" ngf-max-size="1MB" ngf-select="uploadLogo($file)" ngf-drop="uploadLogo($file)"
+                ngf-resize="{width: 200, height: 200}">
+                <span ng-if="!logoUrl" translate>Logo auswählen oder einfügen</span>
+                <span ng-if="logoUrl" translate>Ein neues Logo auswählen oder einfügen</span>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label for="logo" translate>Style<br />(Admin-Seite)</label>
+            </div>
+            <div class="col-md-2" ng-if="logoUrl">
+              <a href="" ng-click="downloadStyle('admin')" translate>Download</a>
+            </div>
+            <div class="col-md-6">
+              <div class="button drop-box" ng-model="styleAdminFile" name="styleAdminFile" ngf-pattern="'text/css'"
+                ngf-accept="'text/css'" ngf-max-size="1MB" ngf-select="uploadStyle($file, 'style-admin')"
+                ngf-drop="uploadStyle($file, 'style-admin')">
+                <span translate> CSS-Datei auswählen oder einfügen </span>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label for="logo" translate>Style<br />(Kundenportal)</label>
+            </div>
+            <div class="col-md-2" ng-if="logoUrl">
+              <a href="" ng-click="downloadStyle('kundenportal')" translate>Download</a>
+            </div>
+            <div class="col-md-6">
+              <div class="button drop-box" ng-model="styleAdminFile" name="styleAdminFile" ngf-pattern="'text/css'"
+                ngf-accept="'text/css'" ngf-max-size="1MB" ngf-select="uploadStyle($file, 'style-kundenportal')"
+                ngf-drop="uploadStyle($file, 'style-kundenportal')">
+                <span translate> CSS-Datei auswählen oder einfügen </span>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-4">
+              <label for="logo" translate>Importdatei</label>
+            </div>
+            <div class="col-md-2">
+              <a href="" ng-click="downloadImportFile()" translate>Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
