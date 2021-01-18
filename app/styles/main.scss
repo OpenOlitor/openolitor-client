@@ -795,3 +795,13 @@ hr.light {
   justify-content: center;
   padding: 20px;
 }
+
+.dialog {
+  width: inherit;
+
+  > .jumbotron {
+    border-radius: 6px;
+    margin-bottom: 0px;
+    padding: 1.5em;
+  }
+}

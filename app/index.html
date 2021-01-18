@@ -50,7 +50,8 @@
         <hamburger-toggle state="tgState" class="hamburger-toggle" ng-show="loggedIn"></hamburger-toggle>
         <a class="navbar-brand" ng-href="#/">OpenOlitor</a>
         <p class="navbar-text"><span translate>Administrationsumgebung <span ng-if="projekt">für</span></span>
-          <span>{{projekt.bezeichnung}}</span></p>
+          <span>{{projekt.bezeichnung}}</span>
+        </p>
         <ul class="nav navbar-nav pull-right">
           <li>
             <oo-jobqueue></oo-jobqueue>
@@ -81,11 +82,8 @@
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
               aria-expanded="false">{{user.vorname}} {{user.name}} <span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li><a href="#" translate>Einstellungen</a></li>
+              <li ng-if="env !== 'test'"><a href="#/login_settings" translate>Einstellungen</a></li>
               <li role="separator" class="divider"></li>
-              <li ng-if="env !== 'test'"><a href="#/passwd" translate>Passwort wechseln</a></li>
-              <li ng-if="env !== 'test'" ng-show="secondFactorType ==='otp'"><a href="#/reset_otp" translate>OTP Secret
-                  zurücksetzen</a></li>
               <li><a href="#/logout" translate>Abmelden</a></li>
             </ul>
           </li>
