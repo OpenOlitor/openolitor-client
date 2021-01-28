@@ -10,7 +10,8 @@ angular.module('openolitor-admin')
         disableLogin: disableLogin,
         enableLogin: enableLogin,
         sendEinladung: sendEinladung,
-        changeRolle: changeRolle
+        changeRolle: changeRolle,
+        resetOtp: resetOtp
       };
 
       return service;
@@ -29,6 +30,10 @@ angular.module('openolitor-admin')
 
       function sendEinladung(kundeId, personId) {
         return $http.post(appConfig.get().API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/einladungsenden');
+      };
+
+      function resetOtp(kundeId, personId) {
+        return $http.post(appConfig.get().API_URL + 'kunden/' + kundeId + '/personen/' + personId + '/aktionen/reset_otp');
       };
 
       function changeRolle(kundeId, personId, rolle) {
