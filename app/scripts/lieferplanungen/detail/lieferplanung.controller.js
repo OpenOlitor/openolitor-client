@@ -7,13 +7,13 @@ angular.module('openolitor-admin')
     '$routeParams', 'NgTableParams', '$filter', 'LieferplanungModel',
     'ProduzentenService', 'AbotypenOverviewModel', 'ProdukteService',
     'alertService', 'dialogService', 'LIEFERSTATUS', 'LIEFEREINHEIT',
-    'KORBSTATUS', 'msgBus', 'cloneObj',
+    'KORBSTATUS', 'msgBus', 'cloneObj', 'ReportvorlagenService',
     'gettext', '$location', 'lodash', '$uibModal', 'gettextCatalog', 'ProduktekategorienModel',
     function($scope, $rootScope, $routeParams, NgTableParams, $filter,
       LieferplanungModel, ProduzentenService, AbotypenOverviewModel,
       ProdukteService, alertService, dialogService, LIEFERSTATUS,
-      LIEFEREINHEIT, KORBSTATUS, msgBus,
-      cloneObj, gettext, $location, lodash, $uibModal, gettextCatalog, ProduktekategorienModel) {
+      LIEFEREINHEIT, KORBSTATUS, msgBus, cloneObj, ReportvorlagenService,
+      gettext, $location, lodash, $uibModal, gettextCatalog, ProduktekategorienModel) {
       $rootScope.viewId = 'D-Pla';
 
       $scope.liefereinheiten = LIEFEREINHEIT;
@@ -962,7 +962,29 @@ angular.module('openolitor-admin')
               $location.path('/postauslieferungen').search({'q': 'id=' + res.join()});
             });
           }
+        }, {
+          label: gettext('Lieferreport drucken'),
+          iconClass: 'fa fa-print',
+          confirm: false,
+          onExecute: function() {
+            $scope.reportType = 'lieferreport';
+            $scope.vorlageTyp = 'Lieferreport';
+            $scope.showGenerateReport = true;
+            return true;
+          }
         }];
+      }
+
+      $scope.closeBericht = function() {
+        $scope.showGenerateReport = false;
+      };
+
+      $scope.closeBerichtFunct = function() {
+        return $scope.closeBericht;
+      };
+
+      $scope.projektVorlagen = function() {
+        return ReportvorlagenService.getVorlagen('VorlageLieferreport');
       };
 
       $scope.verrechnenActionDisabled= [{

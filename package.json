@@ -1,12 +1,12 @@
 {
   "name": "openolitor-admin",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "OpenOlitor Client Webapplication",
   "repository": {
     "type": "git",
     "url": "git://github.com/OpenOlitor/openolitor-client-admin.git"
   },
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
   "dependencies": {
     "bower": "1.8.8",
     "bower-npm-resolver": "^0.10.0",

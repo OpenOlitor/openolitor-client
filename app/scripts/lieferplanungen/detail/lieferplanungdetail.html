@@ -6,4 +6,7 @@
       <div class="show-hide" ng-show="displayMode === 'lieferanten'" ng-include="'scripts/lieferplanungen/detail/lieferanten.html'"></div>
     </form>
   </div>
+  <oo-sliding-detail slide-in="showGenerateReport" slide-out-function="closeBerichtFunct()">
+    <oo-generate-report on-close="closeBericht" projekt-vorlagen="projektVorlagen()" on-generated="closeBericht" post-path="'lieferplanungen/'+planung.id+'/berichte/auslieferung'" ids="[model.id]" default-file-name="'Lieferreport.odt'|translate"></oo-generate-report>
+  </oo-sliding-detail>
 </div>
