@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2020-10-22 09:39\n"
+"PO-Revision-Date: 2021-03-18 11:17\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -201,7 +201,7 @@ msgstr "Anteilstyp"
 
 #: app/scripts/abos/overview/abosoverview.html:57
 msgid "Abotyp / Vertrieb"
-msgstr ""
+msgstr "Anteilstyp / Vertrieb"
 
 #: app/scripts/abotypen/overview/abotypen.html:11
 #: app/scripts/abotypen/overview/abotypenoverview.controller.js:108
@@ -475,7 +475,7 @@ msgstr ""
 
 #: app/scripts/lieferplanungen/detail/korbplanung.html:83
 msgid "Anzahl Zusatzabos zu liefern:"
-msgstr ""
+msgstr "Anzahl Zusatzanteile zu liefern:"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:210
 msgid "Anzahl aktive Abonnemente"
@@ -932,7 +932,7 @@ msgstr "Abholstation:"
 
 #: app/scripts/auslieferungen/detail/depotauslieferungdetail.html:6
 msgid "Depotauslieferung"
-msgstr "Lieferung and Abholstation"
+msgstr "Lieferung an Abholstation"
 
 #: app/index.html:92
 #: app/scripts/auslieferungen/overview/depotauslieferungenoverview.html:6
@@ -941,7 +941,7 @@ msgstr "Lieferungen an Abholstationen"
 
 #: app/scripts/lieferplanungen/detail/lieferplanung.controller.js:927
 msgid "Depotauslieferungen anzeigen"
-msgstr "Lieferungen and Abholstationen anzeigen"
+msgstr "Lieferungen an Abholstationen anzeigen"
 
 #: app/scripts/depots/overview/depotsoverview.controller.js:71
 msgid "Depotbrief erstellen"

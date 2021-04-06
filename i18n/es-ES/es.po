@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2020-10-29 14:13\n"
+"PO-Revision-Date: 2021-01-08 20:54\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -2058,7 +2058,7 @@ msgstr "No"
 #: app/scripts/touren/detail/tourendetail.html:36
 #: app/scripts/touren/overview/tourenoverview.html:31
 msgid "Name"
-msgstr "Apellidos"
+msgstr "Nombre"
 
 #: app/scripts/produzenten/detail/produzentendetail.html:47
 msgid "Name / Betrieb"

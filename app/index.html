@@ -48,10 +48,8 @@
     <div class="container-fluid">
       <div>
         <hamburger-toggle state="tgState" class="hamburger-toggle" ng-show="loggedIn"></hamburger-toggle>
-        <a class="navbar-brand" ng-href="#/">OpenOlitor</a>
-        <p class="navbar-text"><span translate>Administrationsumgebung <span ng-if="projekt">für</span></span>
-          <span>{{projekt.bezeichnung}}</span>
-        </p>
+        <a class="navbar-brand env-warning" ng-class="env" ng-href="#/">OpenOlitor <span class="env-message">{{env}}</a>
+        <p class="navbar-text"><span translate>Administrationsumgebung <span ng-if="projekt">für</span></span> <span>{{projekt.bezeichnung}}</span></p>
         <ul class="nav navbar-nav pull-right">
           <li>
             <oo-jobqueue></oo-jobqueue>

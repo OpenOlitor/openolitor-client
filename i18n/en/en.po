@@ -11,7 +11,7 @@ msgstr ""
 "X-Crowdin-File-ID: 4\n"
 "Language-Team: English\n"
 "Language: en_US\n"
-"PO-Revision-Date: 2020-10-22 09:40\n"
+"PO-Revision-Date: 2020-10-29 15:23\n"
 
 #: app/scripts/dashboard/dashboard.html:54
 #: app/scripts/lieferplanungen/detail/lieferanten.html:40
@@ -635,7 +635,7 @@ msgstr "Treat automatically"
 #: app/scripts/projekt/settings/projektsettings.html:236
 #: app/scripts/projekt/settings/projektsettings.html:239
 msgid "BIC"
-msgstr ""
+msgstr "BIC"
 
 #: app/scripts/depots/detail/depotsdetail.html:112
 #: app/scripts/produzenten/detail/produzentendetail.html:71
@@ -660,7 +660,7 @@ msgstr "Basic data"
 
 #: app/scripts/projekt/settings/projektsettings.html:131
 msgid "Beim Senden von E-Mail bcc hinzufügen"
-msgstr ""
+msgstr "Add Bcc to all emails"
 
 #: app/scripts/zahlungsimports/import/zahlungsimports.html:39
 msgid "Beim auswählen einer Datei wird die Datei eingelesen. Die daraus resultierenden Zahlungseingänge werden danach aufgelistet."
@@ -1016,7 +1016,7 @@ msgstr "This subscription type is not currently active"
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:60
 #: app/scripts/produzenten/detail/produzentendetail.controller.js:65
 msgid "Dieser Produzent existiert bereits"
-msgstr ""
+msgstr "This producer already exists"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:6
 msgid "Dieser Zusatzabotyp ist derzeit nicht aktiv"
@@ -3563,7 +3563,7 @@ msgstr "Supplementary subscription Ids"
 
 #: app/scripts/abotypen/detail/abotypendetail.html:11
 msgid "Zusatzabotyp"
-msgstr ""
+msgstr "Additional Subscription Type"
 
 #: app/scripts/abotypen/overview/zusatzabotypen.html:11
 #: app/scripts/abotypen/overview/zusatzabotypenoverview.controller.js:82

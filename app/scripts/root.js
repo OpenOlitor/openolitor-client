@@ -158,7 +158,9 @@ angular.module('openolitor-admin')
       };
 
       $scope.storeActiveLang = function(lang) {
-        $cookies.put('activeLang', lang);
+        var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() + 3650);
+        $cookies.put('activeLang', lang, {'expires':expireDate});
       };
 
       if (angular.isUndefined($scope.storedActiveLang())) {
