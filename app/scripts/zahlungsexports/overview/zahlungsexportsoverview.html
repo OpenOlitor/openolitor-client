@@ -28,7 +28,7 @@
               <td data-title="'Rechnungen'|translate" sortable="'erstelldat'"> <a ng-click="createRechnungenLink(zahlungsExport.rechnungen)" translate> Rechnungen anzeigen</a>
               </td>
               <td data-title="'Status'|translate" sortable="'status'">
-                <oo-dropdown dropdown-id="zahlungsExportStatus" display-style="uib-dropdown" values="zahlungsExportStatus" selected="zahlungsExport.status" selected-function="saveStatusFunc(zahlungsExport.id)"></oo-dropdown>
+                <oo-dropdown dropdown-id="zahlungsExportStatus" display-style="uib-dropdown" values="zahlungsExportStatus" selected-value="zahlungsExport.status" selected-function="saveStatusFunc(zahlungsExport.id)"></oo-dropdown>
               </td>
               <td data-title="'Erstelldat'|translate" sortable="'erstelldat'">
                 {{zahlungsExport.erstelldat|date}}

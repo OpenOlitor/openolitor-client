@@ -9,7 +9,7 @@
         <label for="abotyp" translate>Vertrieb</label>
       </div>
       <div class="col-md-8">
-        <oo-dropdown dropdown-id="vertrieb" display-style="uib-dropdown" values="vertriebe" property="label" selected-prop="id" selected="formDaten.vertriebIdNeu" selection-required="true" selected-function="vertriebChangedFunc()" required></oo-dropdown>
+        <oo-dropdown dropdown-id="vertrieb" display-style="uib-dropdown" values="vertriebe" property="label" selected-prop="id" selected-value="formDaten.vertriebIdNeu" selection-required="true" selected-function="vertriebChangedFunc()" required></oo-dropdown>
         <input type="hidden" required ng-model="formDaten.vertriebIdNeu">
       </div>
     </div>
@@ -20,7 +20,7 @@
         <label for="abotyp" translate>Neue Vertriebsart</label>
       </div>
       <div class="col-md-8">
-        <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="vertriebsarten[formDaten.vertriebIdNeu]" property="label" selected-prop="id" selected="formDaten.vertriebsartIdNeu" selection-required="true" required></oo-dropdown>
+        <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="vertriebsarten[formDaten.vertriebIdNeu]" property="label" selected-prop="id" selected-value="formDaten.vertriebsartIdNeu" selection-required="true" required></oo-dropdown>
         <input type="hidden" required ng-model="formDaten.vertriebsartIdNeu">
       </div>
     </div>

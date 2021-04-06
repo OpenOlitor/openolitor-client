@@ -523,7 +523,9 @@ footer,
   padding: 10px;
 }
 
-[ng-quill-editor] { display: block; }
+[ng-quill-editor] {
+  display: block;
+}
 
 @media (max-width: 940px) {
   .adsbygoogle {
@@ -786,6 +788,22 @@ tr.error {
 hr.light {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.qrcode-container {
+  display: grid;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dialog {
+  width: inherit;
+
+  > .jumbotron {
+    border-radius: 6px;
+    margin-bottom: 0px;
+    padding: 1.5em;
+  }
 }
 
 a.env-warning .env-message {

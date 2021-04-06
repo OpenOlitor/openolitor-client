@@ -39,7 +39,9 @@
 </head>
 
 <body class="white openolitor adminportal" ng-controller="OpenOlitorRootController">
-  <ngp-piwik ng-if="loaded && sendStats" ngp-set-js-url="https://stats.openolitor.ch/piwik.js" ngp-set-tracker-url="https://stats.openolitor.ch/piwik.php" ngp-set-document-title="{{document.domain}}/{{document.title}}" ngp-set-site-id="32"> </ngp-piwik>
+  <ngp-piwik ng-if="loaded && sendStats" ngp-set-js-url="https://stats.openolitor.ch/piwik.js"
+    ngp-set-tracker-url="https://stats.openolitor.ch/piwik.php"
+    ngp-set-document-title="{{document.domain}}/{{document.title}}" ngp-set-site-id="32"> </ngp-piwik>
 
   <!-- top navbar -->
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -49,26 +51,37 @@
         <a class="navbar-brand env-warning" ng-class="env" ng-href="#/">OpenOlitor <span class="env-message">{{env}}</a>
         <p class="navbar-text"><span translate>Administrationsumgebung <span ng-if="projekt">für</span></span> <span>{{projekt.bezeichnung}}</span></p>
         <ul class="nav navbar-nav pull-right">
-          <li><oo-jobqueue></oo-jobqueue></li>
+          <li>
+            <oo-jobqueue></oo-jobqueue>
+          </li>
           <li class="dropdown">
-            <a href="" class="dropdown-toggle uppercase" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{displayActiveLang()}} <span class="caret"></span></a>
+            <a href="" class="dropdown-toggle uppercase" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">{{displayActiveLang()}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li ng-hide="activeLang() === 'de_CH'"><a role="button" ng-click="changeLang('de_CH')" title="Deutsch (Schweiz)"><span>Deutsch (Schweiz)</span></a></li>
-              <li ng-hide="activeLang() === 'fr_CH'"><a role="button" ng-click="changeLang('fr_CH')" title="Français"><span>Français (Suisse)</span></a></li>
-              <li ng-hide="activeLang() === 'fr_BE'"><a role="button" ng-click="changeLang('fr_BE')" title="Français"><span>Français (Belgique)</span></a></li>
-              <li ng-hide="activeLang() === 'en_US'"><a role="button" ng-click="changeLang('en_US')" title="English"><span>English</span></a></li>
-              <li ng-hide="activeLang() === 'de_DE'"><a role="button" ng-click="changeLang('de_DE')" title="Deutsch_deutschland"><span>Deutsch (Deutschland)</span></a></li>
-              <li ng-hide="activeLang() === 'es_ES'"><a role="button" ng-click="changeLang('es_ES')" title="Castellano"><span>Castellano</span></a></li>
-              <li ng-hide="activeLang() === 'cs_CZ'"><a role="button" ng-click="changeLang('cs_CZ')" title="Czech"><span>Čeština</span></a></li>
-              <li ng-hide="activeLang() === 'hu_HU'"><a role="button" ng-click="changeLang('hu_HU')" title="Hungarian"><span>Magyar</span></a></li>
+              <li ng-hide="activeLang() === 'de_CH'"><a role="button" ng-click="changeLang('de_CH')"
+                  title="Deutsch (Schweiz)"><span>Deutsch (Schweiz)</span></a></li>
+              <li ng-hide="activeLang() === 'fr_CH'"><a role="button" ng-click="changeLang('fr_CH')"
+                  title="Français"><span>Français (Suisse)</span></a></li>
+              <li ng-hide="activeLang() === 'fr_BE'"><a role="button" ng-click="changeLang('fr_BE')"
+                  title="Français"><span>Français (Belgique)</span></a></li>
+              <li ng-hide="activeLang() === 'en_US'"><a role="button" ng-click="changeLang('en_US')"
+                  title="English"><span>English</span></a></li>
+              <li ng-hide="activeLang() === 'de_DE'"><a role="button" ng-click="changeLang('de_DE')"
+                  title="Deutsch_deutschland"><span>Deutsch (Deutschland)</span></a></li>
+              <li ng-hide="activeLang() === 'es_ES'"><a role="button" ng-click="changeLang('es_ES')"
+                  title="Castellano"><span>Castellano</span></a></li>
+              <li ng-hide="activeLang() === 'cs_CZ'"><a role="button" ng-click="changeLang('cs_CZ')"
+                  title="Czech"><span>Čeština</span></a></li>
+              <li ng-hide="activeLang() === 'hu_HU'"><a role="button" ng-click="changeLang('hu_HU')"
+                  title="Hungarian"><span>Magyar</span></a></li>
             </ul>
           </li>
           <li class="dropdown" ng-show="loggedIn">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.vorname}} {{user.name}} <span class="caret"></span></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">{{user.vorname}} {{user.name}} <span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li><a href="#" translate>Einstellungen</a></li>
+              <li ng-if="env !== 'test'"><a href="#/login_settings" translate>Einstellungen</a></li>
               <li role="separator" class="divider"></li>
-              <li ng-if="env !== 'test'"><a href="#/passwd" translate>Passwort wechseln</a></li>
               <li><a href="#/logout" translate>Abmelden</a></li>
             </ul>
           </li>
@@ -80,48 +93,123 @@
   <div class="sidenav" ng-class="{open: tgState}" ng-show="loggedIn" ng-init="menushow = []">
     <ul class="sidebar-nav" ng-if="loaded">
 
-      <li><a id="nav-kunden" class="nav-item" ng-click="menushow['kunden'] = !menushow['kunden']"><span><i class="fa fa-user-circle"></i> <span translate>Kunde</span></span></a></li>
-      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-kunden" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i> <span translate>Kunden</span></a></li>
-      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-personen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('personen')}]" href="" ng-href="#/personen"><i class="fa fa-users"></i> <span translate>Personen</span></a></li>
-      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-abos" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('abos')}]" href="" ng-href="#/abos"><i class="fa fa-shopping-cart"></i> <span translate>Abos</span></a></li>
-      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-zusatzabos" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zusatzabos')}]" href="" ng-href="#/zusatzabos"><i class="fa fa-cart-arrow-down"></i> <span translate>Zusatzabos</span></a></li>
-      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-pendenzen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('pendenzen')}]" href="" ng-href="#/pendenzen"><i class="fa fa-sticky-note"></i> <span translate>Pendenzen</span></a></li>
+      <li><a id="nav-kunden" class="nav-item" ng-click="menushow['kunden'] = !menushow['kunden']"><span><i
+              class="fa fa-user-circle"></i> <span translate>Kunde</span></span></a></li>
+      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-kunden" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('kunden')}]" href="" ng-href="#/kunden"><i class="fa fa-user"></i>
+          <span translate>Kunden</span></a></li>
+      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-personen" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('personen')}]" href="" ng-href="#/personen"><i class="fa fa-users"></i>
+          <span translate>Personen</span></a></li>
+      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-abos" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('abos')}]" href="" ng-href="#/abos"><i class="fa fa-shopping-cart"></i>
+          <span translate>Abos</span></a></li>
+      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-zusatzabos" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('zusatzabos')}]" href="" ng-href="#/zusatzabos"><i
+            class="fa fa-cart-arrow-down"></i> <span translate>Zusatzabos</span></a></li>
+      <li activate-id="kunden" ng-show="menushow['kunden']"><a id="nav-pendenzen" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('pendenzen')}]" href="" ng-href="#/pendenzen"><i
+            class="fa fa-sticky-note"></i> <span translate>Pendenzen</span></a></li>
 
-      <li><a id="nav-lieferungen" class="nav-item" ng-click="menushow['lieferungen'] = !menushow['lieferungen']"><span><i class="fa fa-bicycle"></i> <span translate>Lieferungen</span></span></a></li>
-      <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-lieferplanung" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('lieferplanung')}]" href="" ng-href="#/lieferplanung"><i class="fa fa-shopping-basket"></i> <span translate>Planung</span></a></li>
-      <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-depotausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depotauslieferungen')}]" href="" ng-href="#/depotauslieferungen"><i class="fa fa-building-o"></i> <span translate>Depotauslieferungen</span></a></li>
-      <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-tourausauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('tourauslieferungen')}]" href="" ng-href="#/tourauslieferungen"><i class="fa fa-truck"></i> <span translate>Tourauslieferungen</span></a></li>
-      <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-postauslieferungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('postauslieferungen')}]" href="" ng-href="#/postauslieferungen"><i class="fa fa-envelope"></i> <span translate>Postauslieferungen</span></a></li>
+      <li><a id="nav-lieferungen" class="nav-item"
+          ng-click="menushow['lieferungen'] = !menushow['lieferungen']"><span><i class="fa fa-bicycle"></i> <span
+              translate>Lieferungen</span></span></a></li>
+      <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-lieferplanung"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('lieferplanung')}]" href=""
+          ng-href="#/lieferplanung"><i class="fa fa-shopping-basket"></i> <span translate>Planung</span></a></li>
+      <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-depotausauslieferungen"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depotauslieferungen')}]" href=""
+          ng-href="#/depotauslieferungen"><i class="fa fa-building-o"></i> <span
+            translate>Depotauslieferungen</span></a></li>
+      <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-tourausauslieferungen"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('tourauslieferungen')}]" href=""
+          ng-href="#/tourauslieferungen"><i class="fa fa-truck"></i> <span translate>Tourauslieferungen</span></a></li>
+      <li activate-id="lieferungen" ng-show="menushow['lieferungen']"><a id="nav-postauslieferungen"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('postauslieferungen')}]" href=""
+          ng-href="#/postauslieferungen"><i class="fa fa-envelope"></i> <span translate>Postauslieferungen</span></a>
+      </li>
 
-      <li><a id="nav-mitarbeit" class="nav-item" ng-click="menushow['mitarbeit'] = !menushow['mitarbeit']"><span><i class="fa fa-paw"></i> <span translate>Mitarbeit</span><span></a></li>
-      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitsangebote" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitsangebote')}]" href="" ng-href="#/arbeitsangebote"><i class="fa fa-exchange"></i> <span translate>Arbeitsangebote</span></a></li>
-      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitseinsaetze" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitseinsaetze')}]" href="" ng-href="#/arbeitseinsaetze"><i class="fa fa-arrows"></i> <span translate>Arbeitseinsätze</span></a></li>
-      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitseinsatzabrechnung" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitseinsatzabrechnung')}]" href="" ng-href="#/arbeitseinsatzabrechnung"><i class="fa fa-calculator"></i> <span translate>Einsätze &amp; Abos</span></a></li>
+      <li><a id="nav-mitarbeit" class="nav-item" ng-click="menushow['mitarbeit'] = !menushow['mitarbeit']"><span><i
+              class="fa fa-paw"></i> <span translate>Mitarbeit</span><span></a></li>
+      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitsangebote"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitsangebote')}]" href=""
+          ng-href="#/arbeitsangebote"><i class="fa fa-exchange"></i> <span translate>Arbeitsangebote</span></a></li>
+      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitseinsaetze"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitseinsaetze')}]" href=""
+          ng-href="#/arbeitseinsaetze"><i class="fa fa-arrows"></i> <span translate>Arbeitseinsätze</span></a></li>
+      <li activate-id="mitarbeit" ng-show="menushow['mitarbeit']"><a id="nav-arbeitseinsatzabrechnung"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitseinsatzabrechnung')}]" href=""
+          ng-href="#/arbeitseinsatzabrechnung"><i class="fa fa-calculator"></i> <span translate>Einsätze &amp;
+            Abos</span></a></li>
 
-      <li><a id="nav-finanzen" class="nav-item" ng-click="menushow['finanzen'] = !menushow['finanzen']"><span><i class="fa fa-usd"></i> <span translate>Finanzen</span></span></a></li>
-      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-rechnungspositionen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungspositionen')}]" href="" ng-href="#/rechnungspositionen"><i class="fa fa-list"></i> <span translate>Rechnungspositionen</span></a></li>
-      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-rechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
-      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-einkaufsrechnungen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('einkaufsrechnungen')}]" href="" ng-href="#/einkaufsrechnungen"><i class="fa fa-calculator"></i> <span translate>Einkaufsrechnungen</span></a></li>
-      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-zahlungsimports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsimports')}]" href="" ng-href="#/zahlungsimports"><i class="fa fa-credit-card"></i> <span translate>Zahlungs-Imports</span></a></li>
-      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-zahlungsexports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('zahlungsexports')}]" href="" ng-href="#/zahlungsexports"><i class="fa fa-credit-card"></i> <span translate>Zahlungsauftrag-Exports</span></a></li>
+      <li><a id="nav-finanzen" class="nav-item" ng-click="menushow['finanzen'] = !menushow['finanzen']"><span><i
+              class="fa fa-usd"></i> <span translate>Finanzen</span></span></a></li>
+      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-rechnungspositionen"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('rechnungspositionen')}]" href=""
+          ng-href="#/rechnungspositionen"><i class="fa fa-list"></i> <span translate>Rechnungspositionen</span></a></li>
+      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-rechnungen" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('rechnungen')}]" href="" ng-href="#/rechnungen"><i
+            class="fa fa-envelope-o"></i> <span translate>Rechnungen</span></a></li>
+      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-einkaufsrechnungen"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('einkaufsrechnungen')}]" href=""
+          ng-href="#/einkaufsrechnungen"><i class="fa fa-calculator"></i> <span translate>Einkaufsrechnungen</span></a>
+      </li>
+      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-zahlungsimports" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('zahlungsimports')}]" href="" ng-href="#/zahlungsimports"><i
+            class="fa fa-credit-card"></i> <span translate>Zahlungs-Imports</span></a></li>
+      <li activate-id="finanzen" ng-show="menushow['finanzen']"><a id="nav-zahlungsexports" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('zahlungsexports')}]" href="" ng-href="#/zahlungsexports"><i
+            class="fa fa-credit-card"></i> <span translate>Zahlungsauftrag-Exports</span></a></li>
 
-      <li><a id="nav-einstellungen" class="nav-item" ng-click="menushow['einstellungen'] = !menushow['einstellungen']"><span><i class="fa fa-database"></i> <span translate>Einstellungen</span></span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-depots" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('depots')}]" href="" ng-href="#/depots"><i class="fa fa-building-o"></i> <span translate>Depots</span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-touren" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('touren')}]" href="" ng-href="#/touren"><i class="fa fa-map-signs"></i> <span translate>Touren</span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-abotypen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('abotypen')}]" href="" ng-href="#/abotypen"><i class="fa fa-clone"></i> <span translate>Abotypen</span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-produzenten" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produzenten')}]" href="" ng-href="#/produzenten"><i class="fa fa-leaf"></i> <span translate>Produzenten</span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-produkte" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produkte')}]" href="" ng-href="#/produkte"><i class="fa fa-pagelines"></i> <span translate>Produkte</span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('kundentypen')}]" href="" ng-href="#/kundentypen"><i class="fa fa-user-md"></i> <span translate>Kundentypen</span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('personCategories')}]" href="" ng-href="#/personCategories"><i class="fa fa-user-md"></i> <span translate>Personenkategorien</span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produktkategorien')}]" href="" ng-href="#/produktkategorien"><i class="fa fa-random"></i> <span translate>Produktekategorien</span></a></li>
-      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitskategorien')}]" href="" ng-href="#/arbeitskategorien"><i class="fa fa-exchange"></i> <span translate>Arbeitskategorien</span></a></li>
+      <li><a id="nav-einstellungen" class="nav-item"
+          ng-click="menushow['einstellungen'] = !menushow['einstellungen']"><span><i class="fa fa-database"></i> <span
+              translate>Einstellungen</span></span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-depots" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('depots')}]" href="" ng-href="#/depots"><i
+            class="fa fa-building-o"></i> <span translate>Depots</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-touren" class="nav-item sublevel-1"
+          ng-class="[{active:currentPathContains('touren')}]" href="" ng-href="#/touren"><i class="fa fa-map-signs"></i>
+          <span translate>Touren</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-abotypen"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('abotypen')}]" href=""
+          ng-href="#/abotypen"><i class="fa fa-clone"></i> <span translate>Abotypen</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-produzenten"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produzenten')}]" href=""
+          ng-href="#/produzenten"><i class="fa fa-leaf"></i> <span translate>Produzenten</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-produkte"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produkte')}]" href=""
+          ng-href="#/produkte"><i class="fa fa-pagelines"></i> <span translate>Produkte</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('kundentypen')}]" href=""
+          ng-href="#/kundentypen"><i class="fa fa-user-md"></i> <span translate>Kundentypen</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('personCategories')}]" href=""
+          ng-href="#/personCategories"><i class="fa fa-user-md"></i> <span translate>Personenkategorien</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('produktkategorien')}]" href=""
+          ng-href="#/produktkategorien"><i class="fa fa-random"></i> <span translate>Produktekategorien</span></a></li>
+      <li activate-id="einstellungen" ng-show="menushow['einstellungen']"><a id="nav-settings"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('arbeitskategorien')}]" href=""
+          ng-href="#/arbeitskategorien"><i class="fa fa-exchange"></i> <span translate>Arbeitskategorien</span></a></li>
 
-      <li><a id="nav-administration" class="nav-item" ng-click="menushow['administration'] = !menushow['administration']"><span><i class="fa fa-cogs"></i> <span translate>Administration</span></span></a></li>
-      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-reports" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('reports')}]" href="" ng-href="#/reports"><i class="fa fa-bar-chart"></i> <span translate>Auswertungen</span></a></li>
-      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-journal" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('journal')}]" href="" ng-href="#/journal"><i class="fa fa-list-ul"></i> <span translate>Journal</span></a></li>
-      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-reportvorlagen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('reportvorlagen')}]" href="" ng-href="#/reportvorlagen"><i class="fa fa-file-text-o"></i> <span translate>Report-Vorlagen</span></a></li>
-      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-mailvorlagen" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('mailvorlagen')}]" href="" ng-href="#/mailvorlagen"><i class="fa fa-envelope-o"></i> <span translate>Mail-Vorlagen</span></a></li>
-      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-settings" class="nav-item sublevel-1" ng-class="[{active:currentPathContains('projektsettings')}]" href="" ng-href="#/projektsettings"><i class="fa fa-sitemap"></i> <span translate>Projekt</span></a></li>
+      <li><a id="nav-administration" class="nav-item"
+          ng-click="menushow['administration'] = !menushow['administration']"><span><i class="fa fa-cogs"></i> <span
+              translate>Administration</span></span></a></li>
+      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-reports"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('reports')}]" href=""
+          ng-href="#/reports"><i class="fa fa-bar-chart"></i> <span translate>Auswertungen</span></a></li>
+      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-journal"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('journal')}]" href=""
+          ng-href="#/journal"><i class="fa fa-list-ul"></i> <span translate>Journal</span></a></li>
+      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-reportvorlagen"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('reportvorlagen')}]" href=""
+          ng-href="#/reportvorlagen"><i class="fa fa-file-text-o"></i> <span translate>Report-Vorlagen</span></a></li>
+      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-mailvorlagen"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('mailvorlagen')}]" href=""
+          ng-href="#/mailvorlagen"><i class="fa fa-envelope-o"></i> <span translate>Mail-Vorlagen</span></a></li>
+      <li activate-id="administration" ng-show="menushow['administration']"><a id="nav-settings"
+          class="nav-item sublevel-1" ng-class="[{active:currentPathContains('projektsettings')}]" href=""
+          ng-href="#/projektsettings"><i class="fa fa-sitemap"></i> <span translate>Projekt</span></a></li>
 
     </ul>
   </div>
@@ -154,9 +242,11 @@
       </script>
       <a href="https://openolitor.org" target="_blank">openolitor.org</a>
       <span class="pre-info">
-        <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'" tooltip-popup-close-delay="3000" tooltip-placement="top-right" tooltip-class="version-tooltip"></span>
+        <span class="glyphicon glyphicon-info-sign" uib-tooltip-template="'versionInfo.html'"
+          tooltip-popup-close-delay="3000" tooltip-placement="top-right" tooltip-class="version-tooltip"></span>
       </span>
-      <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi" ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
+      <span ng-class="[{disconnected:!connected, connected:connected}]"><i class="fa fa-wifi"
+          ng-attr-title="{{messagingSocketClosedReason}}"></i></span>
     </div>
   </footer>
 
@@ -215,6 +305,9 @@
   <script src="bower_components/angular-css-injector/angular-css-injector.js"></script>
   <script src="bower_components/airbrake-js/dist/client.min.js"></script>
   <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+  <script src="bower_components/qrcode-generator/js/qrcode.js"></script>
+  <script src="bower_components/qrcode-generator/js/qrcode_UTF8.js"></script>
+  <script src="bower_components/angular-qrcode/angular-qrcode.js"></script>
   <script src="bower_components/openolitor-core/dist/scripts/openolitor-core.js"></script>
   <script src="bower_components/ng-iban/dist/ng-iban.js"></script>
   <script src="bower_components/angular-piwik/angular-piwik.js"></script>
