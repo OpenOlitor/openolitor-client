@@ -71,7 +71,7 @@
                 <label for="lieferrhythmus" ng-if="getModel() === 'abotypen'" translate>Lieferrhythmus</label>
               </div>
               <div class="col-md-4">
-                <oo-dropdown dropdown-id="lieferrhythmus" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected="abotyp.lieferrhythmus" ng-required></oo-dropdown>
+                <oo-dropdown dropdown-id="lieferrhythmus" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="lieferrhythmen" selected-prop="id" property="label" selected-value="abotyp.lieferrhythmus" ng-required></oo-dropdown>
               </div>
             </div>
             <div class="row form-group">
@@ -92,8 +92,8 @@
                 </div>
                 <div class="col-md-3">
 
-                  <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="abotyp.preiseinheit" ng-required></oo-dropdown>
-                  <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'zusatzAbotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected="zusatzAbotyp.preiseinheit" ng-required></oo-dropdown>
+                  <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'abotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected-value="abotyp.preiseinheit" ng-required></oo-dropdown>
+                  <oo-dropdown dropdown-id="preiseinheit" ng-if="getModel() === 'zusatzAbotypen'" display-style="uib-dropdown" values="preiseinheiten" selected-prop="id" property="label" selected-value="zusatzAbotyp.preiseinheit" ng-required></oo-dropdown>
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@
                 <label for="laufzeit" translate>Laufzeit</label>
               </div>
               <div class="col-md-3">
-                <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected="abotyp.laufzeiteinheit" ng-required></oo-dropdown>
+                <oo-dropdown dropdown-id="laufzeiteinheit" display-style="uib-dropdown" values="laufzeiteinheiten" selected-prop="id" property="label" selected-value="abotyp.laufzeiteinheit" ng-required></oo-dropdown>
               </div>
               <div class="col-md-2" ng-if="abotyp.laufzeiteinheit !== unbeschraenkt" >
                 <input type="number" step="1" class="form-control" name="laufzeit" ng-model="abotyp.laufzeit" placeholder="{{'Laufzeit'|translate}}" required></input>
@@ -112,7 +112,7 @@
               </div>
               <div class="col-md-1">
                 <input ng-if="abotyp.laufzeiteinheit === unbeschraenkt" type="text" name="vertragslaufzeiteinheit" ng-model="abotyp.vertragslaufzeit.einheit" hidden maxlength = 50 required />
-                <oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
+                <oo-dropdown ng-if="abotyp.laufzeiteinheit === unbeschraenkt" dropdown-id="vertraglaufzeiteinheit-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected-value="abotyp.vertragslaufzeit.einheit" selection-required="true" ng-required></oo-dropdown>
               </div>
             </div>
             <div class="row form-group" ng-if="getModel() === 'abotypen'">
@@ -124,7 +124,7 @@
               </div>
               <div class="col-md-1">
                 <input type="text" name="kuendigungsfristeinheit" ng-model="abotyp.kuendigungsfrist.einheit" hidden maxlength = 50 required/>
-                <oo-dropdown dropdown-id="kuendigungsfrist-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected="abotyp.kuendigungsfrist.einheit" selection-required="abotyp.kuendigungsfrist.wert" ng-required></oo-dropdown>
+                <oo-dropdown dropdown-id="kuendigungsfrist-dropdown" display-style="uib-dropdown" values="fristeinheiten" selected-prop="id" property="label" selected-value="abotyp.kuendigungsfrist.einheit" selection-required="abotyp.kuendigungsfrist.wert" ng-required></oo-dropdown>
               </div>
             </div>
             <div class="row form-group" ng-if="getModel() === 'abotypen'">

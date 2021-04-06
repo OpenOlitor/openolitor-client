@@ -11,7 +11,7 @@
          <label for="abotyp" translate>Abotyp</label>
        </div>
        <div class="col-md-8">
-         <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="lists.abotypen" property="name" selected-prop="id" selected="abo.abotypId"></oo-dropdown>
+         <oo-dropdown dropdown-id="abotyp" display-style="uib-dropdown" values="lists.abotypen" property="name" selected-prop="id" selected-value="abo.abotypId"></oo-dropdown>
          <input type="hidden" required ng-model="abo.abotypId">
        </div>
      </div>
@@ -21,7 +21,7 @@
            <label for="abotyp" translate>Vertrieb</label>
          </div>
          <div class="col-md-8">
-           <oo-dropdown dropdown-id="vertrieb" display-style="uib-dropdown" values="lists.vertriebe[abo.abotypId]" property="label" selected-prop="id" selected="abo.vertriebId" required></oo-dropdown>
+           <oo-dropdown dropdown-id="vertrieb" display-style="uib-dropdown" values="lists.vertriebe[abo.abotypId]" property="label" selected-prop="id" selected-value="abo.vertriebId" required></oo-dropdown>
            <input type="hidden" required ng-model="abo.vertriebId">
          </div>
        </div>
@@ -32,7 +32,7 @@
            <label for="abotyp" translate>Vertriebsart</label>
          </div>
          <div class="col-md-8">
-           <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="lists.vertriebsarten[abo.vertriebId]" property="label" selected-prop="vertriebsart" selected="abo.vertriebsart" required></oo-dropdown>
+           <oo-dropdown dropdown-id="vertriebsart" display-style="uib-dropdown" values="lists.vertriebsarten[abo.vertriebId]" property="label" selected-prop="vertriebsart" selected-value="abo.vertriebsart" required></oo-dropdown>
            <input type="hidden" required ng-model="abo.vertriebsartId">
          </div>
        </div>

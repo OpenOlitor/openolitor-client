@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-md-8">
                   <oo-dropdown dropdown-id="anrede" display-style="uib-dropdown" selected-prop="id"
-                    property="label.long" values="anreden" selected="person.anrede"></oo-dropdown>
+                    property="label.long" values="anreden" selected-value="person.anrede"></oo-dropdown>
                 </div>
               </div>
               <div class="row form-group">
@@ -161,7 +161,7 @@
                         </div>
                         <div class="col-md-4">
                           <oo-dropdown dropdown-id="rolle" display-style="uib-dropdown" selected-prop="id"
-                            property="label" values="rollen" selected="person.rolle"></oo-dropdown>
+                            property="label" values="rollen" selected-value="person.rolle"></oo-dropdown>
                         </div>
                         <div class="col-md-4">
                           <a role="button" class="btn btn-danger" ng-click="changeRolle(person)"
@@ -328,7 +328,7 @@
                 </div>
                 <div class="col-md-8">
                   <oo-dropdown dropdown-id="paymentType" display-style="uib-dropdown" values="paymentTypes"
-                    selected="kunde.paymentType"></oo-dropdown>
+                    selected-value="kunde.paymentType"></oo-dropdown>
                 </div>
               </div>
               <div class="row form-group">
@@ -554,7 +554,7 @@
                 </div>
                 <div class="col-md-2">
                   <oo-dropdown dropdown-id="pendenzstatus" display-style="uib-dropdown" values="pendenzstatus"
-                    selected-prop="id" property="label" selected="pendenz.status" ng-required></oo-dropdown>
+                    selected-prop="id" property="label" selected-value="pendenz.status" ng-required></oo-dropdown>
                 </div>
                 <div class="col-md-2">
                   <div class="pull-right" ng-if="!pendenz.generiert">

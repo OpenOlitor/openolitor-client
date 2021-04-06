@@ -56,7 +56,7 @@
           </span>
           <div class="col-md-12">
             <span class="fa fa-filter"></span>
-            <oo-dropdown dropdown-id="kategorien" display-style="uib-dropdown" values="kategorienL" selected="produkteKategorie" selected-function="filterDataForCategoriesFunc()"></oo-dropdown>
+            <oo-dropdown dropdown-id="kategorien" display-style="uib-dropdown" values="kategorienL" selected-value="produkteKategorie" selected-function="filterDataForCategoriesFunc()"></oo-dropdown>
           </div>
         </div>
         <div class="panel-body produkteliste">
@@ -139,7 +139,7 @@
                   <div>{{liefereinheiten[korbprodukt.einheit.toUpperCase()].label.short|translate}}</div>
                 </span>
                 <span ng-if="valuesEditable() && isUnlisted(korbprodukt)">
-                  <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label.short" selected="korbprodukt.einheit" ng-required></oo-dropdown>
+                  <oo-dropdown dropdown-id="einheit" display-style="uib-dropdown" values="liefereinheiten" selected-prop="id" property="label.short" selected-value="korbprodukt.einheit" ng-required></oo-dropdown>
                 </span>
               </td>
               <td data-title="'Preis'|translate" ng-if="projekt.preiseSichtbar">
@@ -163,7 +163,7 @@
                   {{korbprodukt.produzentKurzzeichen}}
                 </span>
                 <span ng-if="valuesEditable()">
-                  <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="title" selected-prop="title" selected="korbprodukt.produzentKurzzeichen" selected-function="selectedProduzentFunc()" selected-function-scope="korbprodukt" required></oo-dropdown>
+                  <oo-dropdown dropdown-id="produzent" display-style="uib-dropdown" values="korbprodukt.produzentenL" property="title" selected-prop="title" selected-value="korbprodukt.produzentKurzzeichen" selected-function="selectedProduzentFunc()" selected-function-scope="korbprodukt" required></oo-dropdown>
                 </span>
               </td>
               <td>
